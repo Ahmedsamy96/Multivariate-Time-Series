@@ -11,19 +11,20 @@ import streamlit as st
 
 
 
-data_url= r"https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT-temp.csv"
+data_url= "https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT_temp.csv"
 # Function to load data from GitHub
 def load_data(url):
     response = requests.get(url)
     # Check if download was successful
     response.raise_for_status() 
     # Read CSV
-    df = pd.read_csv(StringIO(response.text), sep=',', header=None)
+    df = pd.read_csv(StringIO(response.text), sep=',')
     return df
 
 # Load data
 df = load_data(data_url)
 st.write("Done")
+
 # Drop the first column since it seems like an index
 df.drop(0, axis=1, inplace=True)
 
