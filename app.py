@@ -12,25 +12,13 @@ import streamlit as st
 
 
 data_url= "https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT_temp.csv"
-# Function to load data from GitHub
-def load_data(url):
-    response = requests.get(url)
-    # Check if download was successful
-    response.raise_for_status() 
-    # Read CSV
-    df = pd.read_csv(StringIO(response.text), sep=',')
-    return df
 
-# Load data
-df = load_data(data_url)
-st.write("Done")
+# load data from GitHub
+data_response = requests.get(model_url)
+df = pd.read_csv(data_response.content)
 
 # Drop the first column since it seems like an index
 df.drop(0, axis=1, inplace=True)
-
-# Rename columns
-new_column_names = ['id', 'date', 'temp', 'place']
-df.columns = new_column_names
 
 # Change column names to understand easily
 df.rename(columns={'noted_date':'date', 'out/in':'place'}, inplace=True)
