@@ -7,11 +7,17 @@ from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot
 import streamlit as st
 
-@st.cache_data
+@st.cache_data  # 👈 Add the caching decorator
+def load_data(url):
+    df = pd.read_csv(url.content)
+    return df
+
 data_url= r"https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT-temp.csv"
 data_response = requests.get(data_url)
 data_response.raise_for_status()  # Check if download was successful
-df = pd.read_csv(data_response.content)
+df = load_data(data_response)
+#df = pd.read_csv(data_response.content)
+
 df.drop('room_id/id', axis=1, inplace=True)
 
 # Change column names to understand easily
