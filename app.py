@@ -18,7 +18,7 @@ def load_data(url):
     # Check if download was successful
     response.raise_for_status() 
     # Read CSV
-    df = pd.read_csv(StringIO(response.text), header=None)
+    df = pd.read_csv(StringIO(response.text), sep=',', header=None)
     return df
 
 # Load data
