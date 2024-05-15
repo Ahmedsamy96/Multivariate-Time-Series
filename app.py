@@ -14,15 +14,10 @@ data_url= "https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT
 
 # load data from GitHub
 data_response = requests.get(data_url)
-try:
-    # Read CSV
-    df = pd.read_csv(io.BytesIO(data_response.content))
-    # Drop the first column since it seems like an index
-    df.drop('room_id/id', axis=1, inplace=True)
-    # Display DataFrame
-    st.write(df)
-except pd.errors.ParserError as e:
-    st.error(f"An error occurred while parsing the CSV file: {e}")
+df = pd.read_csv(io.BytesIO(data_response.content))
+# Drop the first column since it seems like an index
+df.drop('room_id/id', axis=1, inplace=True)
+
 
 # Change column names to understand easily
 df.rename(columns={'noted_date':'date', 'out/in':'place'}, inplace=True)
