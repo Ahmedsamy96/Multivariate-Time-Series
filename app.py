@@ -17,7 +17,8 @@ import streamlit as st
 def load_data(url):
     response = requests.get(url)
     csv_data = StringIO(response.text)
-    df = pd.read_csv(csv_data, sep=",", header = True)
+    custom_header = ["id","room_id/id","noted_date","temp","out/in"]  
+    df = pd.read_csv(csv_data, sep="," ,header=None, names=custom_header)
     return df
 
 # GitHub CSV URL
