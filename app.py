@@ -1,3 +1,4 @@
+import requests
 import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -16,7 +17,6 @@ data_url= r"https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IO
 data_response = requests.get(data_url)
 data_response.raise_for_status()  # Check if download was successful
 df = load_data(data_response)
-#df = pd.read_csv(data_response.content)
 
 df.drop('room_id/id', axis=1, inplace=True)
 
@@ -123,6 +123,8 @@ org_df['season'] = org_df['daily'].apply(lambda x : month2seasons(x.month))
 org_df = pd.get_dummies(org_df, columns=['season'])
 
 def run_prophet(place, prediction_periods, plot_comp=True):
+    st.dataframe(df)
+    
     # make dataframe for training
     prophet_df = pd.DataFrame()
     prophet_df["ds"] = pd.date_range(start=org_df['daily'][0], end=org_df['daily'][133])
