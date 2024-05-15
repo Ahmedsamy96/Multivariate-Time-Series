@@ -14,7 +14,7 @@ data_url= "https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT
 
 # load data from GitHub
 data_response = requests.get(data_url)
-df = pd.read_csv(data_response)
+df = pd.read_csv(data_response.content)
 
 # Drop the first column since it seems like an index
 df.drop('room_id/id', axis=1, inplace=True)
