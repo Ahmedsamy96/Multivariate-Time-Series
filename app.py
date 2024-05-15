@@ -12,9 +12,9 @@ import streamlit as st
 
 
 data_url= r"https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT-temp.csv"
-#data_response = requests.get(data_url)
+data_response = requests.get(data_url)
 #data_response.raise_for_status()  # Check if download was successful
-df = pd.read_csv(data_url)
+df = pd.read_csv(StringIO(data_response.text))
 
 df.drop('room_id/id', axis=1, inplace=True)
 
