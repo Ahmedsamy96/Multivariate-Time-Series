@@ -7,14 +7,14 @@ import os
 from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot
 import streamlit as st
-import io
+from io import StringIO
 
 
 data_url= "https://github.com/Ahmedsamy96/Multivariate-Time-Series/blob/main/IOT_temp.csv"
 
 # load data from GitHub
 data_response = requests.get(data_url)
-df = pd.read_csv(io.BytesIO(data_response.content))
+df = pd.read_csv(StringIO(data_response.content))
 # Drop the first column since it seems like an index
 df.drop('room_id/id', axis=1, inplace=True)
 
