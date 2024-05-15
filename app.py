@@ -17,7 +17,7 @@ import streamlit as st
 def load_data(url):
     response = requests.get(url)
     csv_data = StringIO(response.text)
-    df = pd.read_csv(csv_data)
+    df = pd.read_csv(csv_data, sep=',')
     return df
 
 # GitHub CSV URL
