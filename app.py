@@ -8,7 +8,6 @@ from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot
 import streamlit as st
 
-@st.cache_data  # 👈 Add the caching decorator
 def load_data(url):
     df = pd.read_csv(url.content)
     return df
